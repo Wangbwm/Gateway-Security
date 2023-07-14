@@ -1,0 +1,26 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://114.132.229.115:3306/spring-cloud-learn?serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: 1259963577
+  application:
+    name: orderservice
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        cluster-name: WH
+        # namespace: 80d62952-d559-44bc-b0a4-5f8967a6eb13
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #???SQL??????????
+
+feign:
+  httpclient:
+    enabled: true
+    max-connections: 200
+    max-connections-per-route: 50

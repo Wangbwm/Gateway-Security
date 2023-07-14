@@ -1,0 +1,44 @@
+server:
+  port: 10010
+logging:
+  level:
+    com.morewen: debug
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://userservice
+          predicates:
+            - Path=/user/**
+        - id: order-service
+          uri: lb://orderservice
+          predicates:
+            - Path=/order/**
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://114.132.229.115:3306/security?serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: 1259963577
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印SQL日志到控制台
+
+security:
+  basic:
+    enabled: true
+
+redis:
+  # redis数据库索引(默认为0)，我们使用索引为3的数据库，避免和其他数据库冲突
+  database: 0
+  # redis端口（默认为6379）
+  port: 6379
